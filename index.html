@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the number</title>
+</head>
+<body>
+	<h1>Lets play a game !</h1>
+	<h2>Guess the number</h2>
+	<h4>Choose a number between 1 and 100</h4>
+	<p id="message"></p>
+	<input type="number" name="user_number" id="user_number"><button onclick="buttonPressed()" id="guessBtn">Guess the number</button>
+	<button id="resetBtn" hidden onclick="resetGame()">Reset the game</button>
+	<script type="text/javascript">
+		var randomNumber = Math.ceil(Math.random()*100)
+		var chances = 5;
+		/// 3 data types + 2 control flow (if else)
+        /// global vs local variable - what are the data that you need to store?
+        /// logic - using control flow
+        /// you will show using alert , next week or the following week, we will see how to show items on the page [ Number is too low. 4 tries remaining, Number is too high 3 tries remaining.. Sorry you lose, the number is 68, Congratulation you guessed the correct number]
+        function buttonPressed(){
+        	chances--;
+	    // Get the number entered inside input
+	    var number = document.getElementById("user_number").value
+	    // Show alert
+	    // The logic will be here
+	    // Focus too low, too high,it,s the right number
+	    // The notion chances - can only try 5 times if not its game over !
+	    if (number < randomNumber){
+	    	if (chances == 0) {
+	    		document.getElementById("message").innerHTML = "Game over the number is "+randomNumber
+	    		document.getElementById("resetBtn").hidden = false;
+	    		document.getElementById("guessBtn").disabled = true
+	    	}
+	    	else {
+	    		document.getElementById("message").innerHTML = "Number is too low. Please try again. You have " +chances+ " chances left "
+	    	}
+	    }
+	    else if (number > randomNumber){
+	    	if (chances == 0) {
+	    		document.getElementById("message").innerHTML = "Game over the number is "+randomNumber
+	    		document.getElementById("guessBtn").disabled = true
+	    		document.getElementById("resetBtn").hidden = false;
+	    	}
+	    	else {
+	    		document.getElementById("message").innerHTML = "Number is too high. Please try again. You have " +chances+ " chances left "
+	    	}
+	    }
+	    else {
+	    	document.getElementById("message").innerHTML = "Congratulation you guess the right number"
+	    	document.getElementById("resetBtn").hidden = false;
+	    	document.getElementById("guessBtn").disabled = true
+	    }
+	    document.getElementById("user_number").value = ""
+	}
+	function resetGame(){
+		document.getElementById("resetBtn").hidden = true;
+		document.getElementById("guessBtn").disabled = false
+		randomNumber = Math.ceil(Math.random()*100)
+		chances = 5
+		document.getElementById("user_number").value = ""
+		alert("A new number has been chosen. Good Luck !")
+	}
+</script>
+</body>
+</html>
